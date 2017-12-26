@@ -9,6 +9,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="225dp">
+        <ImageView
+            android:id="@+id/formulario_foto"
+            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:src="@drawable/pawn"
+            android:background="#b2c3ff"/>
+
+        <Button
+            android:id="@+id/formulario_botao_foto"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/fundocamera"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"/>
+    </RelativeLayout>
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

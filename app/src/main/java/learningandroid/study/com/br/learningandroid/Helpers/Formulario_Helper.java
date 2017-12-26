@@ -1,6 +1,9 @@
 package learningandroid.study.com.br.learningandroid.Helpers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import learningandroid.study.com.br.learningandroid.Formulario;
@@ -19,6 +22,7 @@ public class Formulario_Helper {
     EditText CampoEndereco;
     RatingBar CampoRate;
     EditText CampoSite;
+    ImageView CampoFoto;
 
     public Formulario_Helper(Formulario formActivity){
         CampoNome = (EditText)formActivity.findViewById(R.id.formulario_nome);
@@ -26,6 +30,7 @@ public class Formulario_Helper {
         CampoEndereco = (EditText)formActivity.findViewById(R.id.formulario_endereco);
         CampoSite = (EditText)formActivity.findViewById(R.id.formulario_site);
         CampoRate = (RatingBar)formActivity.findViewById(R.id.formulario_avaliacao);
+        CampoFoto = (ImageView)formActivity.findViewById(R.id.formulario_foto);
     }
 
     public Aluno PegaAluno(){
@@ -39,6 +44,7 @@ public class Formulario_Helper {
         this.aluno.setEndereco((CampoEndereco).getText().toString());
         this.aluno.setRate(Double.valueOf((CampoRate).getProgress()));
         this.aluno.setSite((CampoSite).getText().toString());
+        this.aluno.setCaminhoFoto((String)CampoFoto.getTag());
     }
 
     public void preencheForm(Aluno aluno) {
@@ -47,6 +53,17 @@ public class Formulario_Helper {
         CampoTelefone.setText(aluno.getTelefone());
         CampoRate.setProgress((int)aluno.getRate());
         CampoSite.setText(aluno.getSite());
+        carregaImagem(aluno.getCaminhoFoto());
         this.aluno = aluno;
+    }
+
+    public void carregaImagem(String caminhoFoto){
+        if(caminhoFoto != null){
+            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
+            Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+            CampoFoto.setImageBitmap(bitmapReduzido);
+            CampoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
+            CampoFoto.setTag(caminhoFoto);
+        }
     }
 }

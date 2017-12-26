@@ -7,12 +7,22 @@ import java.io.Serializable;
  */
 
 public class Aluno implements Serializable{
-    Long id;
-    String Nome;
-    String Endereco;
-    String Telefone;
-    String site;
-    double Rate;
+    private Long id;
+    private String Nome;
+    private String Endereco;
+    private String Telefone;
+    private String site;
+    private double Rate;
+
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
+    }
+
+    private String caminhoFoto;
 
     public String getSite() { return site; }
 

@@ -20,20 +20,23 @@ import learningandroid.study.com.br.learningandroid.Modelos.Aluno;
 public class AlunoDAO extends SQLiteOpenHelper{
 
     public AlunoDAO(Context context) {
-        super(context, "Agenda", null , 2);
+        super(context, "Agenda", null , 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE TB_ALUNOS (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT, telefone TEXT,site TEXT, nota REAL);";
+        String sql = "CREATE TABLE TB_ALUNOS (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT, telefone TEXT,site TEXT, nota REAL, caminhoFoto TEXT);";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS TB_ALUNOS;";
-        db.execSQL(sql);
-        onCreate(db);
+        switch (oldVersion){
+            case 2:
+                String sql = "ALTER TABLE TB_ALUNOS ADD COLUMN caminhoFoto TEXT";
+                db.execSQL(sql);
+                break;
+        }
     }
 
     public void InsereAluno(Aluno aluno){
@@ -50,6 +53,7 @@ public class AlunoDAO extends SQLiteOpenHelper{
         dados.put("endereco", aluno.getEndereco());
         dados.put("nota", aluno.getRate());
         dados.put("site", aluno.getSite());
+        dados.put("caminhoFoto", aluno.getCaminhoFoto());
         return dados;
     }
 
@@ -66,6 +70,7 @@ public class AlunoDAO extends SQLiteOpenHelper{
             aluno.setEndereco(c.getString(c.getColumnIndex("endereco")));
             aluno.setRate(c.getDouble(c.getColumnIndex("nota")));
             aluno.setSite(c.getString(c.getColumnIndex("site")));
+            aluno.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
 
             alunos.add(aluno);
         }
