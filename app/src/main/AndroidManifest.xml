@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="learningandroid.study.com.br.learningandroid">
 
-    <uses-permission android:name="android.p
-
-    .ermission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
