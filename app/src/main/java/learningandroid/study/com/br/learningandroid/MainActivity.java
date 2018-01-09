@@ -21,6 +21,7 @@ import java.util.jar.Manifest;
 
 import learningandroid.study.com.br.learningandroid.DAO.AlunoDAO;
 import learningandroid.study.com.br.learningandroid.Modelos.Aluno;
+import learningandroid.study.com.br.learningandroid.adapter.AlunosAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         List<Aluno> alunos = dao.buscaAlunos();
         dao.close();
 
-
-        ArrayAdapter<Aluno> newaloha= new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1,alunos);
+        AlunosAdapter newaloha = new AlunosAdapter(alunos, this);
         listaAlunos.setAdapter(newaloha);
     }
 
