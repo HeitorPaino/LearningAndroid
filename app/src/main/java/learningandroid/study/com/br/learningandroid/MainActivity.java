@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,7 @@ import java.util.jar.Manifest;
 import learningandroid.study.com.br.learningandroid.DAO.AlunoDAO;
 import learningandroid.study.com.br.learningandroid.Modelos.Aluno;
 import learningandroid.study.com.br.learningandroid.adapter.AlunosAdapter;
+import learningandroid.study.com.br.learningandroid.converter.AlunoConverter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,6 +63,30 @@ public class MainActivity extends AppCompatActivity {
 
         AlunosAdapter newaloha = new AlunosAdapter(alunos, this);
         listaAlunos.setAdapter(newaloha);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_enviar_notas:
+                AlunoDAO dao = new AlunoDAO(this);
+                List<Aluno> alunos = dao.buscaAlunos();
+                dao.close();
+
+                AlunoConverter conversor = new AlunoConverter();
+                String json = conversor.converteParaJson(alunos);
+
+
+                Toast.makeText(this, json, Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
