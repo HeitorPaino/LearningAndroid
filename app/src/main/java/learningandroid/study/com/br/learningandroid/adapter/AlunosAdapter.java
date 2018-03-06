@@ -55,8 +55,15 @@ public class AlunosAdapter extends BaseAdapter {
         TextView campoNome = v.findViewById(R.id.item_nome);
         TextView campoTelefone = v.findViewById(R.id.item_telefone);
         ImageView campoFoto = v.findViewById(R.id.item_foto);
+        TextView campoEndereco = v.findViewById(R.id.item_endereco);
+        TextView campoSite = v.findViewById(R.id.item_site);
+
         campoNome.setText(aluno.getNome());
         campoTelefone.setText(aluno.getTelefone());
+        if(campoEndereco != null && campoSite != null){
+            campoEndereco.setText(aluno.getEndereco());
+            campoSite.setText(aluno.getSite());
+        }
         if(aluno.getCaminhoFoto() != null){
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 8;
